@@ -6,6 +6,8 @@ _Looking for a shareable component template? Go here --> [sveltejs/component-tem
 
 This is a cart project made with [Svelte](https://svelte.dev). It lives at https://github.com/sveltejs/template.
 
+With sveltestrap https://github.com/bestguy/sveltestrap
+
 To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
 
 ```bash

@@ -1,29 +1,16 @@
 <script>
-  export let name;
+  import Pagelayout from "./Views/PageLayout.svelte";
 </script>
 
-<style>
-  main {
-    text-align: center;
-    padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
-  }
+<svelte:head>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link
+    href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/lux/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-oOs/gFavzADqv3i5nCM+9CzXe3e5vXLXZ5LZ7PplpsWpTCufB7kqkTlC9FtZ5nJo"
+    crossorigin="anonymous" />
+</svelte:head>
 
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4em;
-    font-weight: 100;
-  }
-
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
-    }
-  }
-</style>
-
-<main>
-  <h1>My Store {name}!</h1>
-</main>
+<Pagelayout />
