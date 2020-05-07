@@ -1,22 +1,31 @@
 <script>
   import Product from "./Product.svelte";
-  import { cart } from "../Store/store.js";
   import { Button } from "sveltestrap";
+  import { createEventDispatcher } from "svelte";
+
+  const dispatch = createEventDispatcher();
+
+  function forward(event) {
+    dispatch("addCart", event.detail);
+  }
+  function clearCart() {
+    dispatch("clearCart");
+  }
 
   export let products = [];
 
-  let total = 0;
+  export let cart_items_count;
 
-  cart.subscribe(c => {
-    total = c;
-  });
+  // cart.subscribe(c => {
+  //   cart_items_count = c;
+  // });
 
-  const removeItem = () => cart.update(c => c - 1);
+  // const removeItem = () => cart.update(c => c - 1);
 </script>
 
 <div class="container">
   <div class="text-right">
-    {#if total > 0}
+    {#if cart_items_count > 0}
       <a href="#" type="button" class="btn btn-outline-primary">
         <svg
           class="bi bi-bag-fill"
@@ -30,10 +39,10 @@
             4h-1a3.5 3.5 0 117 0h-1A2.5 2.5 0 008 1.5z" />
         </svg>
         Cart
-        <span class="badge badge-light">{total}</span>
+        <span class="badge badge-light">{cart_items_count}</span>
         <span class="sr-only">items</span>
       </a>
-      <Button type="button" color="danger" outline on:click={removeItem}>
+      <Button type="button" color="danger" outline on:click={clearCart}>
         <svg
           class="bi bi-trash"
           width="1em"
@@ -53,7 +62,7 @@
             4H4.118zM2.5 3V2h11v1h-11z"
             clip-rule="evenodd" />
         </svg>
-        Click to remove an item from cart
+        Clear cart
       </Button>
     {:else}
       <a href="#" type="button" class="btn btn-outline-secondary">
@@ -83,7 +92,7 @@
   </div>
   <div class="card-deck mb-3 text-center">
     {#each products as product}
-      <Product {product} />
+      <Product on:addCart={forward} {product} />
     {/each}
   </div>
 </div>

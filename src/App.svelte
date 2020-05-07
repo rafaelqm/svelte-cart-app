@@ -1,5 +1,34 @@
 <script>
+  import productsJson from "./product.js";
   import Pagelayout from "./Views/PageLayout.svelte";
+  import { onMount } from "svelte";
+
+  let title = "";
+  let price = "";
+  let description = "";
+  let products = [];
+  let cartItems = [];
+
+  function setTitle(event) {
+    title = event.target.value;
+  }
+
+  function addToCart(event) {
+    console.log("Add to Cart", event);
+    const title = event.detail;
+    cartItems = cartItems.concat({
+      ...products.find(prod => prod.name === title)
+    });
+    console.log(cartItems);
+  }
+
+  function clearCart() {
+    cartItems = [];
+  }
+
+  onMount(() => {
+    products = productsJson;
+  });
 </script>
 
 <svelte:head>
@@ -13,4 +42,8 @@
     crossorigin="anonymous" />
 </svelte:head>
 
-<Pagelayout />
+<Pagelayout
+  {cartItems}
+  {products}
+  on:clearCart={clearCart}
+  on:addCart={addToCart} />

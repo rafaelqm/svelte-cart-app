@@ -1,13 +1,21 @@
 <script>
   import ContentBox from "../Components/ContentBox.svelte";
-  import productsJson from "../product.js";
-  import { onMount } from "svelte";
+  import { createEventDispatcher } from "svelte";
 
-  let products;
+  const dispatch = createEventDispatcher();
 
-  onMount(() => {
-    products = productsJson;
-  });
+  function forward(event) {
+    dispatch("addCart", event.detail);
+  }
+  function clearCart() {
+    dispatch("clearCart");
+  }
+  export let products;
+  export let cart_items_count;
 </script>
 
-<ContentBox {products} />
+<ContentBox
+  on:addCart={forward}
+  on:clearCart={clearCart}
+  {products}
+  {cart_items_count} />
