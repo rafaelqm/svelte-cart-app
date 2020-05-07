@@ -1,20 +1,30 @@
 <script>
   const logoUrl = "http://placehold.it/180x60";
+  import { createEventDispatcher } from "svelte";
+
+  const dispatchEvent = createEventDispatcher();
+  function changePage(page) {
+    dispatchEvent("changePage", page);
+  }
+
   export let company_name = "My Company";
   let menuOptions = [
     {
       title: "Products",
+      page: "products",
       url: "#",
       active: true
     },
     {
       title: "Cart",
+      page: "checkout",
       url: "#cart",
       active: false
     }
   ];
 
-  const setActivate = ({ title }) => {
+  const setActivate = ({ title, page }) => {
+    changePage(page);
     menuOptions = menuOptions.map(item => ({
       ...item,
       active: item.title === title

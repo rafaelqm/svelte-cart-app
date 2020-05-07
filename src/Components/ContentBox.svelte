@@ -4,12 +4,16 @@
   import { createEventDispatcher } from "svelte";
 
   const dispatch = createEventDispatcher();
+  const dispatchEvent = createEventDispatcher();
 
   function forward(event) {
     dispatch("addCart", event.detail);
   }
   function clearCart() {
     dispatch("clearCart");
+  }
+  function goToCheckout(page) {
+    dispatchEvent("changePage", page);
   }
 
   export let products = [];
@@ -26,7 +30,10 @@
 <div class="container">
   <div class="text-right">
     {#if cart_items_count > 0}
-      <a href="#" type="button" class="btn btn-outline-primary">
+      <button
+        type="button"
+        on:click={() => goToCheckout('checkout')}
+        class="btn btn-outline-primary">
         <svg
           class="bi bi-bag-fill"
           width="1em"
@@ -41,7 +48,7 @@
         Cart
         <span class="badge badge-light">{cart_items_count}</span>
         <span class="sr-only">items</span>
-      </a>
+      </button>
       <Button type="button" color="danger" outline on:click={clearCart}>
         <svg
           class="bi bi-trash"
