@@ -43,7 +43,7 @@
       cart_items_count={cartItems.length} />
   </div>
 {/if}
-<h1>HI {customer.email}</h1>
+
 {#if checkout_visible}
   <div id="checkoutPage" transition:fly={{ y: 100, duration: 500 }}>
     <CheckoutPage bind:customer on:clearCart={clearCart} {cartItems} />
