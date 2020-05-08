@@ -8,6 +8,21 @@
   let description = "";
   let products = [];
   let cartItems = [];
+  let customer = {
+    name: "",
+    email: null,
+    address: null,
+    address2: null,
+    country: null,
+    state: null,
+    zip: null,
+    sameAddress: null,
+    paymentMethod: null,
+    ccName: null,
+    ccNumber: null,
+    ccExpiration: null,
+    ccCvv: null
+  };
 
   function setTitle(event) {
     title = event.target.value;
@@ -43,6 +58,7 @@
 </svelte:head>
 
 <Pagelayout
+  bind:customer
   {cartItems}
   {products}
   on:clearCart={clearCart}

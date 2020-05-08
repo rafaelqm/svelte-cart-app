@@ -29,6 +29,7 @@
 
   export let cartItems;
   export let products;
+  export let customer;
 </script>
 
 <Header on:changePage={changePage} />
@@ -42,9 +43,9 @@
       cart_items_count={cartItems.length} />
   </div>
 {/if}
-
+<h1>HI {customer.email}</h1>
 {#if checkout_visible}
   <div id="checkoutPage" transition:fly={{ y: 100, duration: 500 }}>
-    <CheckoutPage {cartItems} />
+    <CheckoutPage bind:customer on:clearCart={clearCart} {cartItems} />
   </div>
 {/if}
